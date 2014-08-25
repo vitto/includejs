@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>The HTML5 Herald</title>
+    <meta name="author" content="Vittorio Vittori">
+    <meta name="description" content="IncludeJS is a simple ">
+
+    <script src="../vendor/handlebars-v1.3.0.js"></script>
+    <script src="../include.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <include src="template/header.html"></include>
+    <script type="text/javascript">
+        Include.onLoad = function() {
+            console.log("hello!");
+        };
+    </script>
+</body>
+</html>
