@@ -5,6 +5,8 @@ Version 1.0.0
 
 A library to include HTML partials, useful for layout presentation and [Handlebars][handlebars] template ready.
 
+[Download version 1.0.0][release]
+
 ===
 
 Base usage example:
@@ -44,7 +46,7 @@ This is the [folder structure][folder], and this is the result:
 
 ![Render result][image]
 
-
+[release]: https://github.com/vitto/includejs/releases/download/1.0.0/include-v1.0.0.js
 [image]: https://imagizer.imageshack.us/v2/728x214q90/661/eRzoBc.png
 [folder]: https://github.com/vitto/includejs/tree/master/test
 [handlebars]: http://handlebarsjs.com
