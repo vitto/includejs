@@ -22,7 +22,7 @@ var Include = (function () {
     var findElements = function() {
         elements = getElements();
         requests = [];
-        console.log("Notice: found " + elements.length + " element/s");
+      //console.log("Notice: found " + elements.length + " element/s");
         if (elements.length > 0) {
             loadElements();
         } else {
@@ -31,7 +31,7 @@ var Include = (function () {
     };
 
     var loadElements = function() {
-        console.log("Notice: started load elements...");
+      //console.log("Notice: started load elements...");
         var i;
         for (i = 0; elements.length > i; i += 1) {
             appendRequest(elements[i], i);
@@ -44,57 +44,89 @@ var Include = (function () {
             isLoaded : false
         };
 
+      //console.log(element.parentNode);
+
         requests[i].client.open("GET", element.getAttribute("src"));
 
         requests[i].client.element   = element;
         requests[i].client.id        = i;
         requests[i].client.onloadend = function(e) {
-            var element = e.currentTarget.element;
+            var element, htmlString;
 
-            console.log(e.currentTarget.element);
+            element    = e.currentTarget.element;
+
+            htmlString = getCompiledHTML(e.currentTarget.responseText, element);
+
+            element.insertAdjacentHTML("beforeBegin", htmlString);
+            element.parentNode.removeChild(element);
 
             requests[e.currentTarget.id].isLoaded = true;
 
-            var newElement = document.createElement("div");
-            newElement.insertAdjacentHTML("beforeend", e.currentTarget.responseText);
-            element.parentNode.insertBefore(newElement, element.nextSibling);
             if (checkRequestsStatus()) {
-                //findElements();
+                findElements();
             }
-        }
+        };
 
         requests[i].client.send();
-        console.log(requests[i].client);
+      //console.log(requests[i].client);
     };
 
     var checkRequestsStatus = function() {
-        console.log("Notice: checking if all elemnts are loaded");
+      //console.log("Notice: checking if all elemnts are loaded");
         var i;
         for (i = 0; requests.length > i; i += 1) {
-            if (requests[i].isLoaded) {
-                return requests[i].isLoaded;
+            if (!requests[i].isLoaded) {
+                return false;
             }
         }
-        return false;
+        return true;
+    };
+
+    var getCompiledHTML = function(htmlString, element) {
+        var template, textContent;
+        textContent = element.textContent.trim();
+        if (textContent.length > 0 && useHandlebars) {
+            template = Handlebars.compile(htmlString);
+            return template(getJSON(textContent));
+        } else {
+            return htmlString;
+        }
+    };
+
+    var getJSON = function(textContent) {
+        try {
+            var jsonData = eval("(" + textContent + ")");
+            if (jsonData.constructor === {}.constructor) {
+                return jsonData;
+            } else {
+                console.log("Warning: the constructor is not an Object. Empty object will be returned.");
+                return {};
+            }
+        } catch (e) {
+            console.log("Warning: syntax error encountered. Empty object will be returned.");
+            return {};
+        }
     };
 
     return {
         init : function() {
-            console.log("Notice: document loaded");
+          //console.log("Notice: document loaded");
             if (typeof Handlebars !== "undefined") {
                 useHandlebars = true;
-                console.log("Notice: found Handlebars js library");
+              //console.log("Notice: found Handlebars js library");
             } else {
-                console.log("Warning: Handlebars is NOT loaded and will be not used to render HTML include elements");
+                useHandlebars = false;
+              //console.log("Warning: Handlebars is NOT loaded and will be not used to render HTML include elements");
             }
             findElements();
         },
         onLoad : function() {
-            console.log("Notice: all incliude elements are loaded");
+          //console.log("Notice: all incliude elements are loaded");
         }
     };
 }());
 
 document.addEventListener("DOMContentLoaded", function(){
+    "use strict";
     Include.init();
 });
