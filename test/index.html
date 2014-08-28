@@ -14,33 +14,16 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <style type="text/css">
-        body {
-            font-family : helvetica, arial, sans-serif;
-            font-size   : 14px;
-        }
-        div {
-            border  : 1px solid rgb(150,150,150);
-            margin  : 5px;
-            padding : 5px;
-        }
-        span {
-            display : block;
-            padding : 5px;
-        }
-        code {
-            color            : rgb(100,100,100);
-            background-color : rgb(240,240,240);
-            border-radius    : 4px;
-            padding          : 2px 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+
 </head>
 
 <body>
-    <include src="template/header.html"></include>
-    <include src="template/content.html"></include>
-    <include src="template/footer.html"></include>
+    <div class="container">
+        <include src="template/header.html"></include>
+        <include src="template/content.html"></include>
+        <include src="template/footer.html"></include>
+    </div>
     <script type="text/javascript">
         Include.onLoad = function() {
             console.log("Hello! Everything is loaded succesfully and JS can be executed with happyness!");

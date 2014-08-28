@@ -1,3 +1,21 @@
-<div>
+<footer class="footer">
     <span>This is the footer <code>footer.html</code></span>
-</div>
+    <include src="template/footer_content.html">
+        {
+            "items" : [
+                { "name" : "First element of the list" },
+                { "name" : "Second element of the list" },
+                { "name" : "Third element of the list" }
+            ]
+        }
+    </include>
+    <include src="template/footer_content.html">
+        {
+            "items" : [
+                { "name" : "Fourth element of the list" },
+                { "name" : "Fifth element of the list" },
+                { "name" : "Sixth element of the list" }
+            ]
+        }
+    </include>
+</footer>
