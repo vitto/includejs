@@ -1,8 +1,8 @@
 /*!
 GitHub:    https://github.com/vitto/includejs
 License:   MIT Licence
-Version:   1.0.0
-Date:      2014-08-25
+Version:   1.1.0
+Date:      2014-09-26
 Author:    Vittorio Vittori
 Website:   http://vit.to
 */
@@ -11,6 +11,7 @@ var Include = (function () {
 
     "use strict";
 
+    var useMarkdown = false;
     var useHandlebars = false;
     var elements = [];
     var requests = [];
@@ -22,7 +23,6 @@ var Include = (function () {
     var findElements = function() {
         elements = getElements();
         requests = [];
-      //console.log("Notice: found " + elements.length + " element/s");
         if (elements.length > 0) {
             loadElements();
         } else {
@@ -31,7 +31,6 @@ var Include = (function () {
     };
 
     var loadElements = function() {
-      //console.log("Notice: started load elements...");
         var i;
         for (i = 0; elements.length > i; i += 1) {
             appendRequest(elements[i], i);
@@ -44,18 +43,22 @@ var Include = (function () {
             isLoaded : false
         };
 
-      //console.log(element.parentNode);
-
         requests[i].client.open("GET", element.getAttribute("src"));
 
+        requests[i].client.ext       = getExtension(element.getAttribute("src"));
         requests[i].client.element   = element;
         requests[i].client.id        = i;
         requests[i].client.onloadend = function(e) {
-            var element, htmlString;
+            var element, htmlString, extension;
 
             element    = e.currentTarget.element;
+            extension  = e.currentTarget.ext;
 
-            htmlString = getCompiledHTML(e.currentTarget.responseText, element);
+            if (extension === "html" || extension === "htm") {
+                htmlString = getCompiledHTML(e.currentTarget.responseText, element);
+            } else if (extension === "md" || extension === "markdown") {
+                htmlString = getCompiledMarkdown(e.currentTarget.responseText, element);
+            }
 
             element.insertAdjacentHTML("beforeBegin", htmlString);
             element.parentNode.removeChild(element);
@@ -68,11 +71,9 @@ var Include = (function () {
         };
 
         requests[i].client.send();
-      //console.log(requests[i].client);
     };
 
     var checkRequestsStatus = function() {
-      //console.log("Notice: checking if all elemnts are loaded");
         var i;
         for (i = 0; requests.length > i; i += 1) {
             if (!requests[i].isLoaded) {
@@ -80,6 +81,10 @@ var Include = (function () {
             }
         }
         return true;
+    };
+
+    var getExtension = function(filename) {
+        return filename.substr(filename.lastIndexOf(".") + 1).toLowerCase();
     };
 
     var getCompiledHTML = function(htmlString, element) {
@@ -90,6 +95,14 @@ var Include = (function () {
             return template(getJSON(textContent));
         } else {
             return htmlString;
+        }
+    };
+
+    var getCompiledMarkdown = function(markdownString) {
+        if (useMarkdown) {
+            return marked(markdownString);
+        } else {
+            return markdownString;
         }
     };
 
@@ -110,13 +123,17 @@ var Include = (function () {
 
     return {
         init : function() {
-          //console.log("Notice: document loaded");
             if (typeof Handlebars !== "undefined") {
                 useHandlebars = true;
               //console.log("Notice: found Handlebars js library");
             } else {
                 useHandlebars = false;
               //console.log("Warning: Handlebars is NOT loaded and will be not used to render HTML include elements");
+            }
+            if (typeof marked !== "undefined") {
+                useMarkdown = true;
+            } else {
+                useMarkdown = false;
             }
             findElements();
         },
