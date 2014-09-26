@@ -1,9 +1,9 @@
 IncludeJS
 =========
 
-A library to include HTML partials, useful for layout presentation and [Handlebars][handlebars] template ready.
+A library to include HTML and Markdown partials, useful for layout presentation with [Handlebars][handlebars] templates and [Markdown][marked] docs.
 
-[Download version 1.0.0][release]
+[Download version 1.1.0][release]
 
 ===
 
@@ -20,6 +20,7 @@ Base usage example:
     <meta name="description" content="IncludeJS is a library to include HTML partials, useful for static templates">
 
     <script src="../vendor/handlebars-v1.3.0.js"></script>
+    <script src="../vendor/marked.js"></script>
     <script src="../include.js"></script>
 
     <!--[if lt IE 9]>
@@ -29,7 +30,7 @@ Base usage example:
 
 <body>
     <include src="template/header.html"></include>
-    <include src="template/content.html"></include>
+    <include src="template/content.md"></include>
     <include src="template/footer.html"></include>
     <script type="text/javascript">
         Include.onLoad = function() {
@@ -44,7 +45,8 @@ This is the [folder structure][folder], and this is the result:
 
 ![Render result][image]
 
-[release]: https://github.com/vitto/includejs/releases/download/1.0.0/include-v1.0.0.js
+[release]: https://github.com/vitto/includejs/releases/download/1.1.0/include-v1.1.0.js
 [image]: https://imagizer.imageshack.us/v2/728x214q90/661/eRzoBc.png
 [folder]: https://github.com/vitto/includejs/tree/master/test
 [handlebars]: http://handlebarsjs.com
+[marked]: https://github.com/chjj/marked
