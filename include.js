@@ -66,12 +66,12 @@ var Include = (function () {
             jsonRequest.open("GET", jsonSrc);
             jsonRequest.onloadend = function(jsonEvent) {
                 createHtmlLoaded(e, jsonEvent.currentTarget.responseText);
-            }
+            };
             jsonRequest.send();
         } else {
             createHtmlLoaded(e);
         }
-    }
+    };
 
     var createHtmlLoaded = function(e, textContent) {
         var element, json, htmlString, extension;
@@ -98,7 +98,7 @@ var Include = (function () {
         if (checkRequestsStatus()) {
             findElements();
         }
-    }
+    };
 
     var checkRequestsStatus = function() {
         var i;
