@@ -1,9 +1,18 @@
 IncludeJS
 =========
 
-A library to include HTML and Markdown partials, useful for layout presentation with [Handlebars][handlebars] templates and [Markdown][marked] docs.
+A library to include **HTML** and **Markdown** partials inside a web page, useful for layout templates with [Handlebars][handlebars] and read [Markdown][marked] articles without complex works.
 
-[Download version 1.1.0][release]
+**Features**
+
+- Use `<include>` tag to include html partials on the page
+- It supports [Handlebars][handlebars] and can handle JSON strings
+- You can wrap **JSON strings** inside `<include> { "message" : "hello" } </include>` tag to send data to Handlebars
+- You can link a **JSON file** to `<include>` with `data-json-src` attribute
+- It supports [Marked][marked] to include markdown files
+- You can include `.html` or `.md` files, IncludeJS will know what to do
+
+[Download version 1.2.0][release]
 
 ===
 
@@ -29,9 +38,19 @@ Base usage example:
 </head>
 
 <body>
-    <include src="template/header.html"></include>
-    <include src="template/content.md"></include>
-    <include src="template/footer.html"></include>
+    <include
+        src="template/header.html"
+        data-json-src="data/menu.json">
+    </include>
+    <section>
+        <include src="template/content.md"></include>
+    </section>
+    <include src="template/footer.html">
+        {
+            "author" : "Vittorio Vittori",
+            "url"    : "http://vit.to"
+        }
+    </include>
     <script type="text/javascript">
         Include.onLoad = function() {
             console.log("Hello! Everything is loaded succesfully and JS can be executed with happyness!");
@@ -45,7 +64,7 @@ This is the [folder structure][folder], and this is the result:
 
 ![Render result][image]
 
-[release]: https://github.com/vitto/includejs/releases/download/1.1.0/include-v1.1.0.js
+[release]: https://github.com/vitto/includejs/releases/download/1.2.0/include-v1.2.0.js
 [image]: https://imagizer.imageshack.us/v2/728x214q90/661/eRzoBc.png
 [folder]: https://github.com/vitto/includejs/tree/master/test
 [handlebars]: http://handlebarsjs.com

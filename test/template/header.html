@@ -1,13 +1,7 @@
 <nav class="header">
     <span>This is the header block element template <code>header.html</code></span>
-    <include src="template/menu.html">
-        {
-            "buttons" : [
-                { "name" : "First" },
-                { "name" : "Second" },
-                { "name" : "Fourth" },
-                { "name" : "Third" }
-            ]
-        }
+    <include
+        src="template/menu.html"
+        data-json-src="data/first_menu.json">
     </include>
 </nav>

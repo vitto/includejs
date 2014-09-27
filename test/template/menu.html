@@ -1,8 +1,8 @@
-{{#if buttons}}
+{{#if menu}}
 <ul class="menu">
-{{#each buttons}}
+{{#each menu}}
     <li>
-        <a href="#">{{this.name}}</a>
+        <a href="{{this.url}}">{{this.name}}</a>
     </li>
 {{/each}}
     <li>this is a dynamic generated menu located in <code>menu.html</code></li>

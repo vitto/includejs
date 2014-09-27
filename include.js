@@ -43,35 +43,62 @@ var Include = (function () {
             isLoaded : false
         };
 
+
         requests[i].client.open("GET", element.getAttribute("src"));
 
+        requests[i].client.json      = element.getAttribute("data-json-src");
         requests[i].client.ext       = getExtension(element.getAttribute("src"));
         requests[i].client.element   = element;
         requests[i].client.id        = i;
         requests[i].client.onloadend = function(e) {
-            var element, htmlString, extension;
-
-            element    = e.currentTarget.element;
-            extension  = e.currentTarget.ext;
-
-            if (extension === "html" || extension === "htm") {
-                htmlString = getCompiledHTML(e.currentTarget.responseText, element);
-            } else if (extension === "md" || extension === "markdown") {
-                htmlString = getCompiledMarkdown(e.currentTarget.responseText, element);
-            }
-
-            element.insertAdjacentHTML("beforeBegin", htmlString);
-            element.parentNode.removeChild(element);
-
-            requests[e.currentTarget.id].isLoaded = true;
-
-            if (checkRequestsStatus()) {
-                findElements();
-            }
+            prepareHtmlLoaded(e);
         };
 
         requests[i].client.send();
     };
+
+    var prepareHtmlLoaded = function(e) {
+        var jsonSrc, jsonRequest;
+        jsonSrc = e.currentTarget.json;
+
+        if (jsonSrc !== null) {
+            jsonRequest = new XMLHttpRequest();
+            jsonRequest.open("GET", jsonSrc);
+            jsonRequest.onloadend = function(jsonEvent) {
+                createHtmlLoaded(e, jsonEvent.currentTarget.responseText);
+            }
+            jsonRequest.send();
+        } else {
+            createHtmlLoaded(e);
+        }
+    }
+
+    var createHtmlLoaded = function(e, textContent) {
+        var element, json, htmlString, extension;
+
+        element    = e.currentTarget.element;
+        extension  = e.currentTarget.ext;
+        json       = e.currentTarget.json;
+
+        if (typeof textContent === "undefined") {
+            textContent = element.textContent.trim();
+        }
+
+        if (extension === "html" || extension === "htm") {
+            htmlString = getCompiledHTML(e.currentTarget.responseText, textContent);
+        } else if (extension === "md" || extension === "markdown") {
+            htmlString = getCompiledMarkdown(e.currentTarget.responseText);
+        }
+
+        element.insertAdjacentHTML("beforeBegin", htmlString);
+        element.parentNode.removeChild(element);
+
+        requests[e.currentTarget.id].isLoaded = true;
+
+        if (checkRequestsStatus()) {
+            findElements();
+        }
+    }
 
     var checkRequestsStatus = function() {
         var i;
@@ -87,9 +114,9 @@ var Include = (function () {
         return filename.substr(filename.lastIndexOf(".") + 1).toLowerCase();
     };
 
-    var getCompiledHTML = function(htmlString, element) {
-        var template, textContent;
-        textContent = element.textContent.trim();
+    var getCompiledHTML = function(htmlString, textContent) {
+        var template;
+
         if (textContent.length > 0 && useHandlebars) {
             template = Handlebars.compile(htmlString);
             return template(getJSON(textContent));

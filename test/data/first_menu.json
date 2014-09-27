@@ -1,0 +1,11 @@
+{
+    "menu" : [
+        {
+            "name" : "Page name 1",
+            "url"  : "#fake-url-page-1"
+        },{
+            "name" : "Page name 2",
+            "url"  : "#fake-url-page-2"
+        }
+    ]
+}
