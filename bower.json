@@ -1,0 +1,23 @@
+{
+  "name": "includejs",
+  "version": "1.2.1",
+  "homepage": "https://github.com/vitto/includejs",
+  "authors": [
+    "Vittorio Vittori <me@vittoriovittori.com>"
+  ],
+  "description": "Loads HTML partials with handlebars",
+  "main": "include.js",
+  "keywords": [
+    "css",
+    "sass",
+    "front-end",
+    "framework",
+    "frontsize"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}
