@@ -40,7 +40,7 @@ Base usage example:
 <body>
     <include
         src="template/header.html"
-        data-json-src="data/menu.json"
+        data-json-src="data/menu.json">
     </include>
     <section>
         <include src="template/content.md"></include>
