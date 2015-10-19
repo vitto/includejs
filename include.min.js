@@ -1,8 +1,8 @@
 /*!
 GitHub:    https://github.com/vitto/includejs
 License:   MIT Licence
-Version:   1.2.0
-Date:      2014-09-27
+Version:   1.2.2
+Date:      2015-10-19
 Author:    Vittorio Vittori
 Website:   http://vit.to
 */

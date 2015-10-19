@@ -12,7 +12,7 @@ A library to include **HTML** and **Markdown** partials inside a web page, usefu
 - It supports [Marked][marked] to include markdown files
 - You can include `.html` or `.md` files, IncludeJS will know what to do
 
-[Download version 1.2.0][release]
+[Download version 1.2.2][release]
 
 ===
 
@@ -28,8 +28,8 @@ Base usage example:
     <meta name="author" content="Vittorio Vittori">
     <meta name="description" content="IncludeJS is a library to include HTML partials, useful for static templates">
 
-    <script src="../vendor/handlebars-v1.3.0.js"></script>
-    <script src="../vendor/marked.js"></script>
+    <script src="test/vendor/handlebars-v1.3.0.js"></script>
+    <script src="test/vendor/marked.js"></script>
     <script src="../include.js"></script>
 
     <!--[if lt IE 9]>
@@ -64,7 +64,7 @@ This is the [folder structure][folder], and this is the result:
 
 ![Render result][image]
 
-[release]: https://github.com/vitto/includejs/releases/download/1.2.0/include-v1.2.0.js
+[release]: https://github.com/vitto/includejs/releases/tag/1.2.2
 [image]: https://imagizer.imageshack.us/v2/728x214q90/661/eRzoBc.png
 [folder]: https://github.com/vitto/includejs/tree/master/test
 [handlebars]: http://handlebarsjs.com

@@ -1,6 +1,7 @@
 # User specific & automatically generated files #
 #################################################
 node_modules
+bower_components
 .sass-cache
 
 # OS generated files #
