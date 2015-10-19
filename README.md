@@ -63,7 +63,7 @@ Base usage example:
 To test it on Mac OSX run this command in the root folder:
 
 ```
-npm install && ./node_modules/.bin/bower install && php -S localhost:8000 -t ./
+npm install && ./node_modules/.bin/bower install && php -S localhost:8000 -t ./ && open http://localhost:8000/test/index.html
 ```
 
 Then, in the browser go to:
