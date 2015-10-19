@@ -2,6 +2,7 @@
 #################################################
 node_modules
 bower_components
+test/vendor/
 .sass-cache
 
 # OS generated files #

@@ -60,6 +60,18 @@ Base usage example:
 </html>
 ```
 
+To test it on Mac OSX use this command in the root folder:
+
+```
+php -S localhost:8000 -t ./
+```
+
+Then, in the browser go to:
+
+```
+http://localhost:8000/test/index.html
+```
+
 This is the [folder structure][folder], and this is the result:
 
 ![Render result][image]
