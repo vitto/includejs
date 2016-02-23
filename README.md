@@ -3,6 +3,16 @@ IncludeJS
 
 A library to include **HTML** and **Markdown** partials inside a web page, useful for layout templates with [Handlebars][handlebars] and read [Markdown][marked] articles without complex works.
 
+**Installation**
+
+To download the last release you can use **Bower**:
+
+```
+bower install --save include-js
+```
+
+You can also [download version 1.2.2][release] from github.
+
 **Features**
 
 - Use `<include>` tag to include html partials on the page
@@ -12,7 +22,7 @@ A library to include **HTML** and **Markdown** partials inside a web page, usefu
 - It supports [Marked][marked] to include markdown files
 - You can include `.html` or `.md` files, IncludeJS will know what to do
 
-[Download version 1.2.2][release]
+
 
 ===
 
