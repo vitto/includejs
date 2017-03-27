@@ -1,6 +1,8 @@
 IncludeJS
 =========
 
+This project is discontinued.
+
 A library to include **HTML** and **Markdown** partials inside a web page, useful for layout templates with [Handlebars][handlebars] and read [Markdown][marked] articles without complex works.
 
 **Installation**
@@ -81,10 +83,6 @@ Then, in the browser go to:
 ```
 http://localhost:8000/test/index.html
 ```
-
-This is the [folder structure][folder], and this is the result:
-
-![Render result][image]
 
 [release]: https://github.com/vitto/includejs/releases/tag/1.2.2
 [image]: https://imagizer.imageshack.us/v2/728x214q90/661/eRzoBc.png
